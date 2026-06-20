@@ -444,12 +444,18 @@ Citation
 
 If you use Labscribber in academic work:
 
-@software{labscribber,
+@software {labscribber,
+
   author = {Asif Raza},
+  
   title = {Labscribber Pro: Enterprise Spectral Analysis Suite},
+  
   year = {2026},
+  
   version = {1.0},
+  
   url = {https://github.com/asifverse4/labscribber}
+  
 }
 License
 
