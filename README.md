@@ -455,6 +455,14 @@ If you use Labscribber in academic work:
   version = {1.0},
   
   url = {https://github.com/asifverse4/labscribber}
+
+  ❤️SPECIAL THANKS TO❤️
+  
+                    DR. IMRAN A. KHAN
+                    
+                    HUMA BASHEER 
+                    
+                                For Always motivatinga and encouraging me to do more and helped me go beyond my limits. ❤️
   
 }
 License
