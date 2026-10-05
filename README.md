@@ -1,480 +1,518 @@
-Labscribber Pro — Enterprise Scientific Spectroscopy Suite
 <div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:07111f,45:123a5a,100:00b8d9&height=250&section=header&text=LabScribber%20Pro&fontSize=62&fontColor=ffffff&fontAlignY=36&desc=Scientific%20Spectroscopy%20Analysis%20Suite&descAlignY=61&descSize=20&animation=fadeIn" width="100%" alt="LabScribber Pro banner" />
 
+<br />
 
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=19&pause=1000&color=67E8F9&center=true&vCenter=true&width=900&lines=Transform+experimental+spectra+into+scientific+insight;Process+%E2%80%A2+Analyze+%E2%80%A2+Fit+%E2%80%A2+Visualize+%E2%80%A2+Report;Built+for+modern+research+laboratories" alt="Animated LabScribber tagline" />
 
+<br />
 
+<a href="https://github.com/asifverse4/LabScribber/stargazers">
+<img src="https://img.shields.io/github/stars/asifverse4/LabScribber?style=for-the-badge&logo=github&color=f59e0b" alt="GitHub stars" />
+</a>
+<a href="https://github.com/asifverse4/LabScribber/network/members">
+<img src="https://img.shields.io/github/forks/asifverse4/LabScribber?style=for-the-badge&logo=github&color=0284c7" alt="GitHub forks" />
+</a>
+<a href="https://github.com/asifverse4/LabScribber/blob/main/LICENSE">
+<img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" alt="MIT License" />
+</a>
+<img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9 or later" />
 
+<br /><br />
 
+<strong>Professional spectral analysis, signal processing, deconvolution, multivariate analytics, and publication-ready figure generation.</strong>
 
+<br /><br />
 
-
-Professional Spectral Analysis, Visualization, Deconvolution, and Publication-Ready Figure Generation
-
-Created by Asif Raza
+<a href="#-overview">Overview</a> •
+<a href="#-workflow">Workflow</a> •
+<a href="#-features">Features</a> •
+<a href="#-quick-start">Quick Start</a> •
+<a href="#-roadmap">Roadmap</a>
 
 </div>
-Overview
 
-Labscribber Pro is an advanced desktop application designed for chemists, material scientists, nanotechnology researchers, spectroscopists, and academic laboratories.
+---
 
-The software provides a complete workflow from:
+## 🔬 Overview
 
-Raw Experimental Data → Signal Processing → Peak Analysis → Curve Fitting → Publication Figure → Scientific Report
+**LabScribber Pro** is an advanced Python desktop application for chemists, materials scientists, spectroscopists, nanotechnology researchers, and academic laboratories.
 
-Unlike many plotting tools, Labscribber integrates:
+It provides an integrated workflow for converting raw experimental data into reproducible scientific results:
 
-Smart multi-format data ingestion
-Advanced signal processing
-Automatic peak detection
-Spectral interpretation assistance
-PCA multivariate analysis
-Tauc plot generation
-Job's plot analysis
-Publication-quality visualization
-HDF5 workspace management
-Automated report generation
-Key Features
-Data Import Engine
+> **Raw Data → Signal Processing → Peak Analysis → Curve Fitting → Visualization → Scientific Report**
 
-Supports:
+LabScribber combines data ingestion, spectral processing, peak interpretation, deconvolution, PCA, Tauc plots, Job’s plots, publication styling, HDF5 workspace management, and automated reporting in one research-focused application.
 
-CSV
-TXT
-DAT
-XLS
-XLSX
-Smart Multi-Column Detection
+---
 
-Labscribber automatically:
+## 🧭 Scientific Workflow
 
-Detects X-axis column
-Detects multiple Y columns
-Extracts multiple spectra from a single spreadsheet
-Preserves headers as dataset names
+<table>
+<tr>
+<td align="center" width="16%">
 
-Example:
+### 01
 
-Wavelength	Sample A	Sample B	Sample C
-200	0.12	0.18	0.09
-201	0.13	0.19	0.10
+## 📥
 
-Imports all spectra automatically.
+### Import
 
-Supported Techniques
-UV–Vis Spectroscopy
-FTIR Spectroscopy
-Raman Spectroscopy
-Fluorescence Spectroscopy
-XRD
-XPS
-¹H NMR
-¹³C NMR
-Cyclic Voltammetry
-Signal Processing Tools
-Smoothing
-Savitzky-Golay Filter
-Adjustable window size
-Adjustable polynomial order
-Derivative calculations
+Load CSV, TXT, DAT, XLS, or XLSX datasets.
 
-Supports:
+</td>
+<td align="center" width="2%">➜</td>
+<td align="center" width="16%">
 
-Raw signal
-First derivative
-Second derivative
-Moving Average Filter
+### 02
 
-Noise reduction for experimental datasets.
+## 🧹
 
-Baseline Correction
-ALS Baseline
+### Process
 
-Best for:
+Smooth, normalize, differentiate, and correct baselines.
 
-FTIR
-Raman
-UV-Vis
+</td>
+<td align="center" width="2%">➜</td>
+<td align="center" width="16%">
 
-Features:
+### 03
 
-Adjustable λ parameter
-Iterative optimization
-Shirley Background
+## 📍
 
-Optimized for:
+### Analyze
 
-XPS spectra
-Blank Spectrum Subtraction
+Detect peaks, assign regions, and inspect spectral features.
 
-Remove:
+</td>
+<td align="center" width="2%">➜</td>
+<td align="center" width="16%">
 
-Solvent contribution
-Instrument background
-Reference sample signals
-Normalization
+### 04
 
-Min-Max normalization:
+## 🧩
 
-0 → minimum intensity
-1 → maximum intensity
+### Model
 
-Useful for:
+Fit Gaussian, Lorentzian, or Voigt peak components.
 
-Comparative spectroscopy
-PCA analysis
-Peak Analysis
-Automatic Peak Detection
+</td>
+<td align="center" width="2%">➜</td>
+<td align="center" width="16%">
 
-Based on:
+### 05
 
-scipy.signal.find_peaks()
+## 🎨
 
-Features:
+### Visualize
 
-Prominence filtering
-Distance filtering
-Manual peak editing
-Interactive Peak Picking
+Create publication-quality overlays, heatmaps, and figures.
 
-Simply click on a peak to:
+</td>
+<td align="center" width="2%">➜</td>
+<td align="center" width="16%">
 
-Add annotation
-Include in fitting workflow
-Generate assignments
-Expert Interpretation System
+### 06
 
-Labscribber contains a built-in heuristic expert system.
+## 📝
 
-FTIR Assignments
-Region	Assignment
-3200–3600 cm⁻¹	O-H / N-H
-2800–3100 cm⁻¹	C-H Stretch
-1650–1750 cm⁻¹	Carbonyl
-1000–1300 cm⁻¹	C-O Stretch
-¹H NMR Assignments
-Chemical Shift	Assignment
-0.5–1.5 ppm	Alkyl
-1.5–2.5 ppm	Allylic
-2.5–4.5 ppm	Heteroatom
-6.5–8.5 ppm	Aromatic
-9–10.5 ppm	Aldehyde
-UV-Vis Assignments
-Region	Assignment
-200–250 nm	π → π*
-250–350 nm	n → π*
-Peak Deconvolution
+### Report
 
-Supports:
+Export figures, analytical tables, and Markdown reports.
 
-Gaussian Fitting
+</td>
+</tr>
+</table>
 
-Ideal for:
+<div align="center">
 
-UV-Vis
-Fluorescence
-Lorentzian Fitting
+<img src="https://progress-bar.dev/100/?title=research%20workflow&width=700&color=00b8d9" alt="Complete scientific workflow" />
 
-Ideal for:
+<br />
 
-Raman
-NMR
-Voigt Fitting
+<sub>
+A complete research pipeline — from experimental measurement to publication-ready scientific communication.
+</sub>
 
-Ideal for:
+</div>
 
-XPS
-Real experimental spectra
-Levenberg–Marquardt Optimization
+---
 
-Features:
+## ✨ Why LabScribber?
 
-Constrained fitting
-Center tolerance control
-Width bounds
-Residual analysis
+<table>
+<tr>
+<td align="center" width="33%">
 
-Outputs:
+## 📥
 
-Individual peak components
-Total fit
-Residual curve
-Multivariate Analysis
-PCA (Principal Component Analysis)
+### Unified Import
 
-Implemented using:
+Automatically detect axes, extract multiple spectra, and preserve dataset headers.
 
-Singular Value Decomposition (SVD)
+</td>
+<td align="center" width="33%">
 
-Outputs:
+## 🧠
 
-Scores Plot
+### Scientific Analysis
 
-Shows:
+Perform peak detection, curve fitting, PCA, bandgap estimation, and stoichiometric analysis.
 
-Sample clustering
-Similarity trends
-Loadings Plot
+</td>
+<td align="center" width="33%">
 
-Shows:
+## 📊
 
-Variables responsible for variance
+### Publication Output
 
-Useful for:
+Generate polished figures, analytical tables, vector graphics, and reproducible reports.
 
-Material screening
-Batch comparison
-Chemometrics
-Solid-State Analysis
-Tauc Plot Generator
+</td>
+</tr>
+</table>
 
-Supports:
+---
 
-Direct Bandgap
+## 🚀 Features
 
-Automatically:
+<details open>
+<summary><b>📥 Data Import & Workspace Management</b></summary>
 
-Converts wavelength to energy
-Identifies linear region
-Calculates:
-Eg (eV)
+- CSV, TXT, DAT, XLS, and XLSX support
+- Automatic X-axis detection
+- Multiple Y-column and multi-spectrum extraction
+- Header preservation as dataset names
+- HDF5 `.h5` project workspace format
+- Metadata and processing-history storage
+- Undo and redo support
 
-Useful for:
+</details>
 
-Carbon dots
-Semiconductors
-Nanomaterials
-Job's Plot Generator
+<details>
+<summary><b>🧹 Signal Processing</b></summary>
 
-Determine:
+- Savitzky–Golay smoothing
+- Adjustable window size and polynomial order
+- Moving-average filtering
+- First- and second-derivative calculations
+- ALS baseline correction
+- Shirley background correction
+- Blank and solvent subtraction
+- Instrument-background subtraction
+- Min–max normalization
 
-Complex stoichiometry
+</details>
 
-Features:
+<details>
+<summary><b>📍 Peak Analysis & Interpretation</b></summary>
 
-Mole fraction input
-Automatic interpolation
-Stoichiometric estimation
-Visualization Engine
-Publication-Ready Figures
+- Automatic peak detection using `scipy.signal.find_peaks`
+- Prominence filtering
+- Distance filtering
+- Interactive peak picking
+- Manual peak editing
+- Peak annotations
+- FTIR assignment assistance
+- UV–Vis assignment assistance
+- ¹H NMR assignment assistance
 
-Generate figures suitable for:
+</details>
 
-ACS Journals
-Nature Journals
-RSC Journals
-Supported Layouts
-Standard Overlay
+<details>
+<summary><b>🧩 Deconvolution & Curve Fitting</b></summary>
 
-Multiple spectra on same axis.
+- Gaussian fitting
+- Lorentzian fitting
+- Voigt fitting
+- Levenberg–Marquardt optimization
+- Constrained fitting
+- Center tolerance control
+- Width bounds
+- Individual peak components
+- Total fit curve
+- Residual analysis
 
-Waterfall Plot
+</details>
 
-3D spectral stacking.
+<details>
+<summary><b>🧬 Multivariate & Solid-State Analysis</b></summary>
 
-Contour Heatmap
+- Principal Component Analysis
+- SVD-based PCA implementation
+- Scores plots
+- Loadings plots
+- Sample clustering
+- Similarity trend analysis
+- Tauc plot generation
+- Direct bandgap estimation
+- Job’s plot generation
+- Stoichiometric estimation
 
-2D intensity visualization.
+</details>
 
-Advanced Plot Features
-Real-Time Crosshair Tracking
+<details>
+<summary><b>🎨 Visualization & Reporting</b></summary>
 
-Displays:
+- Standard overlay plots
+- Waterfall plots
+- Contour heatmaps
+- Inset plots
+- Highlighted spectral regions
+- Real-time crosshair tracking
+- ACS-inspired styling
+- Nature-inspired styling
+- RSC-inspired styling
+- SVG export
+- PDF export
+- High-DPI PNG export
+- Markdown report generation
+- CSV analytical exports
 
-X coordinate
-Y coordinate
+</details>
 
-while hovering.
+---
 
-Inset Plot
+## 🧪 Supported Techniques
 
-Zoomed region visualization.
+| Technique | Typical Applications |
+| --- | --- |
+| **UV–Vis Spectroscopy** | Absorption analysis, peak detection, Tauc plots |
+| **FTIR Spectroscopy** | Baseline correction and functional-group assignments |
+| **Raman Spectroscopy** | Peak fitting, deconvolution, and comparison |
+| **Fluorescence Spectroscopy** | Spectral analysis and Gaussian fitting |
+| **XRD** | Pattern comparison and visualization |
+| **XPS** | Shirley background and Voigt deconvolution |
+| **¹H NMR** | Chemical-shift assignments and peak fitting |
+| **¹³C NMR** | Spectral visualization and interpretation |
+| **Cyclic Voltammetry** | Electrochemical curve visualization |
 
-Highlight Regions
+---
 
-Mark:
+## ⚡ Quick Start
 
-Absorption bands
-Functional group regions
-Bandgap region
-Journal Styling
+### Clone the Repository
 
-Built-in presets:
+```bash
+git clone https://github.com/asifverse4/LabScribber.git
+cd LabScribber
+```
 
-ACS
-Nature
-RSC
+### Create a Virtual Environment
 
-Automatically adjusts:
+```bash
+python -m venv .venv
+```
 
-Fonts
-Tick styles
-DPI
-Figure dimensions
-Workspace Management
-HDF5 Project Format
+#### macOS / Linux
 
-Save:
+```bash
+source .venv/bin/activate
+```
 
-Spectra
-Processing history
-Plot styles
-Metadata
+#### Windows PowerShell
 
-into a single:
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-.h5
+### Install Dependencies
 
-workspace.
+```bash
+python -m pip install numpy scipy pandas matplotlib PySide6 h5py openpyxl xlrd
+```
 
-Undo / Redo System
+### Launch the Desktop Application
 
-Supports:
-
-Ctrl + Z
-Ctrl + Y
-
-Track:
-
-Processing steps
-Peak additions
-Integrations
-Scientific Reporting
-Markdown Reports
-
-Automatically generate:
-
-Dataset information
-Processing history
-Peak assignments
-Confidence values
-Integrations
-Bandgap calculations
-CSV Export
-
-Export:
-
-Spectral data
-Peak tables
-Analytical results
-Vector Figure Export
-
-Publication-ready:
-
-SVG
-PDF
-PNG
-
-High DPI support.
-
-Sample Applications
-Carbon Dots Research
-UV-Vis analysis
-FTIR interpretation
-Tauc bandgap calculation
-Organic Chemistry
-¹H NMR assignments
-Peak integration
-Materials Science
-Raman analysis
-XRD comparison
-Surface Chemistry
-XPS deconvolution
-Electrochemistry
-Cyclic voltammetry visualization
-Installation
-Clone Repository
-git clone https://github.com/asifverse4/labscribber.git
-
-cd labscribber
-Install Dependencies
-pip install numpy scipy pandas matplotlib PySide6 h5py openpyxl xlrd
-Run GUI
+```bash
 python labscribber.py
-Run CLI Mode
+```
+
+### Run CLI Mode
+
+```bash
 python labscribber.py --cli \
-    --input data_folder \
-    --output results \
-    --tech "UV-Vis Spectroscopy"
-Architecture
-Labscribber
+  --input data_folder \
+  --output results \
+  --tech "UV-Vis Spectroscopy"
+```
+
+---
+
+## 🏗️ Architecture
+
+```text
+LabScribber
 │
-├── Data Ingestion
-│   ├── CSV
-│   ├── Excel
-│   └── TXT
+├── 📥 Data Ingestion
+│   ├── CSV / TXT / DAT
+│   └── Excel XLS / XLSX
 │
-├── Processing Engine
+├── 🧹 Processing Engine
 │   ├── Smoothing
-│   ├── Baseline
+│   ├── Baseline Correction
 │   ├── Normalization
+│   ├── Background Subtraction
 │   └── Derivatives
 │
-├── Analytics Engine
+├── 🧠 Analytics Engine
 │   ├── Peak Detection
+│   ├── Peak Assignment
 │   ├── PCA
 │   ├── Tauc Plot
 │   ├── Job's Plot
-│   └── Deconvolution
+│   └── Curve Deconvolution
 │
-├── Visualization Layer
-│   ├── Overlay
-│   ├── Waterfall
-│   ├── Heatmap
+├── 🎨 Visualization Layer
+│   ├── Overlay Plots
+│   ├── Waterfall Plots
+│   ├── Contour Heatmaps
 │   └── Publication Styles
 │
-└── Reporting System
+└── 📝 Reporting System
     ├── Markdown Reports
     ├── CSV Export
-    └── Figure Export
-Future Roadmap
-Planned Features
-Machine Learning Peak Assignment
-AI Spectral Interpretation
-FTIR Functional Group Predictor
-NMR Structure Assistance
-Automated Figure Caption Generation
-Automated Methods Section Generator
-Journal Submission Assistant
-Spectral Database Search
-Computational Chemistry Integration
-LLM-Powered Scientific Copilot
-Citation
+    └── SVG / PDF / PNG Export
+```
 
-If you use Labscribber in academic work:
+---
 
-@software {labscribber,
+## 📈 Interpretation Helpers
 
-  author = {Asif Raza},
-  
-  title = {Labscribber Pro: Enterprise Spectral Analysis Suite},
-  
-  year = {2026},
-  
+| Technique | Spectral Region | Assignment Aid |
+| --- | ---: | --- |
+| FTIR | 3200–3600 cm⁻¹ | O–H / N–H |
+| FTIR | 2800–3100 cm⁻¹ | C–H stretch |
+| FTIR | 1650–1750 cm⁻¹ | Carbonyl |
+| FTIR | 1000–1300 cm⁻¹ | C–O stretch |
+| ¹H NMR | 0.5–1.5 ppm | Alkyl |
+| ¹H NMR | 1.5–2.5 ppm | Allylic |
+| ¹H NMR | 2.5–4.5 ppm | Heteroatom environment |
+| ¹H NMR | 6.5–8.5 ppm | Aromatic |
+| UV–Vis | 200–250 nm | π → π* |
+| UV–Vis | 250–350 nm | n → π* |
+
+> These ranges are heuristic interpretation aids and should be validated against the sample, instrument settings, and relevant scientific literature.
+
+---
+
+## 📚 Example Research Applications
+
+### Carbon Nanomaterials
+
+- UV–Vis spectral analysis
+- FTIR functional-group interpretation
+- Tauc bandgap estimation
+- Comparative sample visualization
+
+### Organic Chemistry
+
+- ¹H NMR peak assignments
+- Peak integration
+- Spectral comparison
+- Curve fitting
+
+### Materials Science
+
+- Raman peak analysis
+- XRD pattern comparison
+- PCA-based sample classification
+- Publication-quality figure generation
+
+### Surface Chemistry
+
+- XPS background correction
+- Peak deconvolution
+- Component fitting
+- Residual analysis
+
+### Electrochemistry
+
+- Cyclic voltammetry visualization
+- Multi-sample comparison
+- Analytical figure export
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Machine-learning peak assignment
+- [ ] AI-assisted spectral interpretation
+- [ ] FTIR functional-group predictor
+- [ ] NMR structure assistance
+- [ ] Automated figure-caption generation
+- [ ] Automated methods-section generation
+- [ ] Journal submission assistant
+- [ ] Spectral database search
+- [ ] Computational chemistry integration
+- [ ] LLM-powered scientific copilot
+
+---
+
+## 🤝 Contributing
+
+Contributions, ideas, bug reports, scientific validation feedback, and pull requests are welcome.
+
+For major changes:
+
+1. Open an issue first.
+2. Explain the scientific or technical use case.
+3. Create a focused feature branch.
+4. Add clear documentation.
+5. Submit a pull request.
+
+---
+
+## ❤️ Acknowledgements
+
+Special thanks to:
+
+- **Dr. Imran A. Khan**
+- **Huma Basheer**
+
+Thank you for the continued motivation, encouragement, and support.
+
+---
+
+## 📚 Citation
+
+If you use LabScribber in academic work, please cite:
+
+```bibtex
+@software{labscribber,
+  author  = {Raza, Asif},
+  title   = {LabScribber Pro: Enterprise Spectral Analysis Suite},
+  year    = {2026},
   version = {1.0},
-  
-  url = {https://github.com/asifverse4/labscribber}
-
-  ❤️SPECIAL THANKS TO❤️
-  
-                    DR. IMRAN A. KHAN
-                    
-                    HUMA BASHEER 
-                    
-                                For Always motivatinga and encouraging me to do more and helped me go beyond my limits. ❤️
-  
+  url     = {https://github.com/asifverse4/LabScribber}
 }
-License
+```
 
-MIT License
+---
 
-Copyright (c) 2026 Asif Raza
+## 📄 License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files to deal in the Software without restriction.# LabScribber
+LabScribber is released under the [MIT License](LICENSE).
 
-DONATE US HERE:- razorpay.me/@onlyasifraza
+---
 
+<div align="center">
 
-<sub>Built with ❤️ by <a href="https://github.com/your-username">ASIFVERSE4</a></sub>
-</p>
+<a href="https://razorpay.me/@onlyasifraza">
+<img src="https://img.shields.io/badge/Support%20LabScribber-Razorpay-0ea5e9?style=for-the-badge&logo=razorpay&logoColor=white" alt="Support LabScribber on Razorpay" />
+</a>
+
+<br /><br />
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00b8d9,50:123a5a,100:07111f&height=140&section=footer&animation=fadeIn" width="100%" alt="LabScribber footer" />
+
+<br />
+
+<sub>
+Built with ❤️ for scientific discovery by
+<a href="https://github.com/asifverse4">Asif Raza</a>
+· ASIFVERSE4
+</sub>
+
+</div>
