@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use LabscribberPro in your research, please cite it as below."
+type: software
+title: "LabscribberPro"
+version: 1.0.0
+# date-released: "YYYY-MM-DD"  # ADD on release day (must be a real date, or leave commented out)
+license: MIT
+repository-code: "https://github.com/asifverse4/LabScribber"
+abstract: >
+  A browser-based, Electron-packaged scientific spectroscopy workstation
+  covering UV-Vis, FTIR, Raman, 1H/13C NMR, 2D COSY, photoluminescence,
+  XRD, XPS, cyclic voltammetry, EPR, and thermogravimetric simulation,
+  with an automated test suite (177 tests, including UI-level tests)
+  covering baseline correction, peak deconvolution with covariance-based
+  uncertainty, Scherrer/Williamson-Hall XRD analysis, Tauc bandgap
+  extraction, and a substantial chemometrics toolkit (PCA, MCR-ALS, PLS,
+  hierarchical clustering).
+authors:
+  - family-names: Raza
+    given-names: Asif
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: author to add ORCID
+  - family-names: Basheer
+    given-names: Huma
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: author to add ORCID
+keywords:
+  - spectroscopy
+  - FTIR
+  - Raman
+  - UV-Vis
+  - XPS
+  - XRD
+  - cyclic voltammetry
+  - chemometrics
+  - data analysis
+  - scientific software
+preferred-citation:
+  type: article
+  title: "LabscribberPro: A Browser-Based, Actively-Developed Workstation for Multi-Technique Spectroscopic Data Processing, Peak Deconvolution, and Publication-Ready Reporting"
+  authors:
+    - family-names: Raza
+      given-names: Asif
+    - family-names: Basheer
+      given-names: Huma
+    - family-names: Khan
+      given-names: Imran A.
+  year: 2026  # TODO: author to update to the actual publication year
+  journal: "SoftwareX"  # TODO: confirm once accepted
+  # doi: "TODO: DOI once assigned"
