@@ -1,96 +1,105 @@
-# Labscribber
+<div align="center">
 
-[![CI](https://github.com/asifverse4/LabScribber/actions/workflows/ci.yml/badge.svg)](https://github.com/asifverse4/LabScribber/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<img src="assets/hero.svg" alt="LabScribber — scientific spectroscopy workstation" width="100%">
 
-**A browser-based scientific spectroscopy workstation for academic research, covering nine core techniques, backed by an automated test suite of 177 tests (numerical routines and UI behavior).** *(AI-assisted analysis features are on the roadmap but not yet implemented — see "Known Limitations & Roadmap" below.)*
+<br>
 
-Labscribber integrates advanced signal processing, multi-technique spectral
-visualization, chemometric analysis, and journal-grade export pipelines into
-a single application for UV-Vis, FTIR, Raman, NMR (¹H/¹³C/2D COSY), XPS,
-photoluminescence, XRD, and electrochemical (CV/EIS) data.
+[![CI](https://img.shields.io/github/actions/workflow/status/asifverse4/LabScribber/ci.yml?branch=main&style=flat-square&label=CI&labelColor=0C1424&color=5FD6CF)](https://github.com/asifverse4/LabScribber/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-D4B483?style=flat-square&labelColor=0C1424)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-177-5FD6CF?style=flat-square&labelColor=0C1424)](tests)
+[![Node](https://img.shields.io/badge/node-%E2%89%A520.19-D4B483?style=flat-square&labelColor=0C1424)](package.json)
+[![Cite](https://img.shields.io/badge/cite-CITATION.cff-8FA3BF?style=flat-square&labelColor=0C1424)](CITATION.cff)
 
-## Run Locally
+**[Quick start](#quick-start)** &nbsp;·&nbsp; **[Capabilities](#capabilities)** &nbsp;·&nbsp; **[Quality](#quality--reproducibility)** &nbsp;·&nbsp; **[Roadmap](#known-limitations--roadmap)** &nbsp;·&nbsp; **[Citing](#citing)**
 
-**Prerequisites:** Node.js ≥ 20.19
+</div>
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-3. Open `http://localhost:3000` in your browser.
+<br>
 
-## Run as a Desktop App (Electron)
+LabScribber is a browser-based, Electron-packaged workstation for academic spectroscopy. It takes instrument data through baseline correction, peak deconvolution, chemometrics and journal-grade export in one application, and is backed by an automated suite of **177 tests** covering numerical routines and UI behaviour.
+
+<br>
+
+<div align="center">
+<img src="assets/pipeline.svg" alt="Analysis workflow: import, baseline, peaks, deconvolve, chemometrics, report" width="100%">
+</div>
+
+<br>
+
+## Techniques
+
+<div align="center">
+<img src="assets/techniques.svg" alt="UV-Vis, FTIR, Raman, NMR, XPS, PL, XRD, CV, EIS" width="100%">
+</div>
+
+<br>
+
+## Capabilities
+
+| | |
+|---|---|
+| **Signal processing** | Baseline correction, smoothing and peak detection across all supported techniques |
+| **Peak deconvolution** | Multi-peak fitting with covariance-based parameter uncertainty |
+| **Solid-state analysis** | Scherrer and Williamson–Hall XRD analysis; Tauc bandgap extraction |
+| **Chemometrics** | PCA, MCR-ALS, PLS and hierarchical clustering |
+| **NMR** | ¹H, ¹³C and 2D COSY |
+| **Electrochemistry** | Cyclic voltammetry and impedance (EIS) |
+| **Reproducibility** | Session files (`.lsb`), provenance tracking and methods-section text generation |
+| **Export** | Publication-oriented figures and PDF output |
+
+## Quick start
+
+**Requires Node.js ≥ 20.19**
 
 ```bash
-npm run electron:dev
+git clone https://github.com/asifverse4/LabScribber.git
+cd LabScribber
+npm install
+npm run dev
 ```
 
-## Run Tests
+Open **http://localhost:3000**.
+
+<details>
+<summary><b>Desktop app, tests, production build</b></summary>
+
+<br>
 
 ```bash
-npm test
+npm run electron:dev      # desktop app (Electron)
+npm test                  # full test suite
+npm run test:coverage     # coverage report -> coverage/index.html
+npm run build             # production build
+npm run electron:dist     # Windows / macOS / Linux installers
 ```
 
-With a coverage report (`coverage/index.html`):
+`electron:dist` expects `build/icon.ico`, `build/icon.icns` and `build/icon.png` (PNG at least 512×512). Add them before packaging. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the developer guide and [`docs/SESSION_FORMAT.md`](docs/SESSION_FORMAT.md) for the `.lsb` session format.
 
-```bash
-npm run test:coverage
-```
+</details>
 
-Every push and pull request runs the full suite on Node 20/22 via
-[GitHub Actions](.github/workflows/ci.yml) — see the badge above.
+## Quality & reproducibility
 
-## Build for Production
+- **177 automated tests** across the numerical core and the UI.
+- **Continuous integration** runs type-check, tests and a production build on every push and pull request ([workflow](.github/workflows/ci.yml)).
+- **Verified on synthetic data** with known ground truth; see the accompanying paper (`paper.md`).
 
-```bash
-npm run build
-```
+## Known limitations & roadmap
 
-### Desktop installers
+- **Tauc auto-window selection is noise-sensitive**, even with the manual wavelength-range safeguard set correctly (paper §2.3). A scoped fix is planned.
+- **AI-assisted interpretation is planned, not implemented.** A `@google/genai` dependency is declared for future work only.
+- **Real-instrument validation is ongoing.** Validation on non-synthetic datasets is in progress.
 
-`npm run electron:dist` packages Windows / macOS / Linux installers via
-electron-builder (output in `dist-desktop/`). The packaging configuration in
-`package.json` references `build/icon.ico`, `build/icon.icns`, and
-`build/icon.png` (the PNG should be at least 512×512); add these files
-before packaging.
+Full release history: [`CHANGELOG.md`](CHANGELOG.md).
 
-See `CONTRIBUTING.md` for the full developer guide, and `docs/SESSION_FORMAT.md`
-for the `.lsb` session file format specification.
+## Citing
 
-## Known Limitations & Roadmap
+If you use LabScribber in your research, please cite it using [`CITATION.cff`](CITATION.cff). GitHub's **Cite this repository** button reads it directly. A draft JOSS paper is included (`paper.md`, `paper.bib`) but has not been submitted.
 
-- **Tauc bandgap auto-window selection is noise-sensitive.** The automatic
-  window used to extract a bandgap from Tauc-plot data remains sensitive to
-  noise even when the manual wavelength-range safeguard is set correctly.
-  See the accompanying paper (Section 2.3) for exact figures. Tracked as a
-  scoped fix for a future release.
-- **AI-assisted analysis is planned, not yet implemented.** The application
-  declares a `@google/genai` dependency for a future AI-assisted
-  interpretation feature; no such feature is implemented in this version.
-- **Validated against synthetic data; real-instrument validation is
-  ongoing.** The numerical core has been independently verified against
-  synthetic data with known ground truth (see the accompanying paper).
-  Validation against real, non-synthetic instrument datasets is in
-  progress.
+<br>
 
-See `CHANGELOG.md` for the full list of what's included in each release.
+<div align="center">
 
-## Citing LabScribber
+<sub>Developed at the School of Chemical and Life Sciences, Jamia Hamdard University, New Delhi, India.<br>
+Created by <b>Asif Raza</b> · Contributor: <b>Huma Basheer</b> · Released under the <a href="LICENSE">MIT License</a></sub>
 
-If you use LabscribberPro in your research, please cite it using the
-metadata in [`CITATION.cff`](CITATION.cff). A draft JOSS submission paper
-is also included at `paper.md` / `paper.bib`; it is not yet submitted —
-see the `TODO` comment block at the top of `paper.md` for the remaining
-steps (ORCID iDs, archived release, etc.) before it is. A separate,
-independently-reviewed SoftwareX submission describing this codebase is
-in preparation.
-
----
-
-*Developed at the School of Chemical and Life Sciences, Jamia Hamdard
-University, New Delhi, India.*
+</div>
