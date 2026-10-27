@@ -2,7 +2,21 @@
 
 All notable changes to LabscribberPro are documented here. Dates use ISO 8601 (YYYY-MM-DD).
 
-## [1.0.0] — Unreleased (pending first tagged GitHub release)
+## [1.1.1] — 2026-10-27
+
+### Changed
+- CI now tests Node 20 and 22; Node 18 is unsupported (jsdom and the Vite React plugin require Node >= 20.19).
+- Declared `engines.node >= 20.19.0` in `package.json`.
+- Redesigned README with animated graphics.
+
+### Removed
+- Unused dependencies: `@google/genai`, `express`, `dotenv`, `@types/express`; duplicate `vite` entry.
+- `metadata.json` (leftover AI Studio configuration).
+
+### Added
+- `SECURITY.md`, Dependabot configuration, issue templates.
+
+## [1.0.0] — Initial release
 
 Initial public release candidate. This version was independently reviewed
 alongside the accompanying SoftwareX submission; see the paper for full

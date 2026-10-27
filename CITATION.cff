@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use LabscribberPro in your research, please cite it as below."
 type: software
 title: "LabscribberPro"
-version: 1.0.0
-# date-released: "YYYY-MM-DD"  # ADD on release day (must be a real date, or leave commented out)
+version: 1.1.1
+date-released: "2026-10-27"
 license: MIT
 repository-code: "https://github.com/asifverse4/LabScribber"
 abstract: >

@@ -1,8 +1,0 @@
-{
-  "name": "Labscribber Spectroscopy Toolkit",
-  "description": "Enterprise scientific plotting, signal processing, and deconvolution suite for spectrometers (UV-Vis, FTIR, NMR, XPS, Raman). Supports derivatives, ALS baseline correction, PCA, Tauc plot bandgap, Job's plot, and publication-ready journal export formats.",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}

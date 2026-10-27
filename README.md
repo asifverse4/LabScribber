@@ -89,7 +89,7 @@ npm run electron:dist     # Windows / macOS / Linux installers
 ## Known limitations & roadmap
 
 - **Tauc auto-window selection is noise-sensitive**, even with the manual wavelength-range safeguard set correctly (paper §2.3). A scoped fix is planned.
-- **AI-assisted interpretation is planned, not implemented.** A `@google/genai` dependency is declared for future work only.
+- **AI-assisted interpretation is planned, not implemented.** No AI features or AI dependencies are included in this version.
 - **Real-instrument validation is ongoing.** Validation on non-synthetic datasets is in progress.
 
 Full release history: [`CHANGELOG.md`](CHANGELOG.md).
