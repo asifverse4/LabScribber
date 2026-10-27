@@ -26,6 +26,9 @@ LabScribber is a browser-based, Electron-packaged workstation for academic spect
 
 <br>
 
+[![DOI](https://zenodo.org/badge/1266337796.svg)](https://doi.org/10.5281/zenodo.23688639)
+
+
 ## Techniques
 
 <div align="center">
