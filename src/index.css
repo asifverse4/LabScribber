@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+/* -----------------------------------------
+   SCIENTIFIC LIGHT-MODE THEME INTERCEPTORS
+   ----------------------------------------- */
+body.light-mode {
+  background-color: #f4f4f5 !important;
+  color: #09090b !important;
+}
+
+/* Container Backgrounds - Crisp White using robust attribute selectors */
+body.light-mode .bg-zinc-900,
+body.light-mode [class*="bg-zinc-900"],
+body.light-mode .bg-zinc-950,
+body.light-mode [class*="bg-zinc-950"],
+body.light-mode [class*="bg-[#18181b]"],
+body.light-mode [class*="bg-[#121214]"],
+body.light-mode [class*="bg-[#0c0c0e]"],
+body.light-mode [class*="bg-[#131316]"],
+body.light-mode [class*="bg-[#1c1c1f]"],
+body.light-mode [class*="bg-[#111827]"],
+body.light-mode [class*="bg-[#141416]"],
+body.light-mode [class*="bg-[#111113]"],
+body.light-mode .bg-\[\#18181b\],
+body.light-mode .bg-\[\#111827\],
+body.light-mode .bg-\[\#121214\],
+body.light-mode .bg-\[\#0c0c0e\],
+body.light-mode .bg-\[\#131316\],
+body.light-mode .bg-\[\#1c1c1f\],
+body.light-mode .bg-\[\#141416\],
+body.light-mode .bg-\[\#111113\] {
+  background-color: #ffffff !important;
+}
+
+/* Secondary shaded items: tables, list backdrops, etc. */
+body.light-mode [class*="bg-[#18181b]/60"],
+body.light-mode [class*="bg-[#141416]/90"],
+body.light-mode [class*="bg-[#18181b]/50"],
+body.light-mode [class*="bg-zinc-900"],
+body.light-mode [class*="bg-zinc-800/40"],
+body.light-mode .bg-zinc-900,
+body.light-mode .bg-zinc-950,
+body.light-mode .bg-\[\#09090b\],
+body.light-mode .bg-\[\#141416\]\/90,
+body.light-mode .bg-\[\#18181b\]\/50,
+body.light-mode .bg-\[\#18181b\]\/60 {
+  background-color: #fafafa !important;
+}
+
+/* Tool Buttons / Control Backgrounds that shouldn't be dark */
+body.light-mode [class*="bg-[#27272a]"],
+body.light-mode [class*="bg-[#3f3f46]"],
+body.light-mode [class*="bg-[#1f1f23]"],
+body.light-mode [class*="bg-zinc-800"],
+body.light-mode [class*="bg-zinc-850"],
+body.light-mode .bg-zinc-800,
+body.light-mode .bg-zinc-850,
+body.light-mode .bg-\[\#27272a\],
+body.light-mode .bg-\[\#3f3f46\],
+body.light-mode .bg-\[\#1f1f23\] {
+  background-color: #e4e4e7 !important;
+}
+
+/* Active highlights */
+body.light-mode [class*="bg-teal-950/25"],
+body.light-mode [class*="bg-teal-950/40"],
+body.light-mode [class*="bg-indigo-500/10"],
+body.light-mode [class*="bg-pink-500/10"],
+body.light-mode [class*="bg-[#241515]"],
+body.light-mode .bg-teal-950\/25,
+body.light-mode .bg-teal-950\/40 {
+  background-color: rgba(20, 184, 166, 0.08) !important;
+}
+
+/* Borders & Separators */
+body.light-mode [class*="border-[#27272a]"],
+body.light-mode [class*="border-[#1e1e24]"],
+body.light-mode [class*="border-[#3f3f46]"],
+body.light-mode [class*="border-zinc-800"],
+body.light-mode [class*="border-zinc-850"],
+body.light-mode [class*="border-zinc-700"],
+body.light-mode .border-zinc-800,
+body.light-mode .border-zinc-700,
+body.light-mode .border-\[\#27272a\],
+body.light-mode .border-\[\#1e1e24\],
+body.light-mode .border-\[\#3f3f46\] {
+  border-color: #d4d4d8 !important;
+}
+
+/* Primary texts - Handles all dark style texts to be dark black/charcoal in light mode */
+body.light-mode [class*="text-zinc-100"],
+body.light-mode [class*="text-zinc-200"],
+body.light-mode [class*="text-zinc-300"],
+body.light-mode [class*="text-slate-100"],
+body.light-mode [class*="text-slate-200"],
+body.light-mode [class*="text-slate-300"],
+body.light-mode [class*="text-gray-100"],
+body.light-mode [class*="text-gray-200"],
+body.light-mode [class*="text-gray-350"],
+body.light-mode [class*="text-neutral-100"],
+body.light-mode [class*="text-neutral-200"],
+body.light-mode [class*="text-neutral-300"],
+body.light-mode .text-white,
+body.light-mode .text-zinc-100,
+body.light-mode .text-zinc-200,
+body.light-mode .text-zinc-300,
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4 {
+  color: #09090b !important;
+}
+
+/* Secondary texts - Handles middle grays to be highly scannable charcoal colors */
+body.light-mode [class*="text-zinc-400"],
+body.light-mode [class*="text-zinc-450"],
+body.light-mode [class*="text-zinc-500"],
+body.light-mode [class*="text-zinc-555"],
+body.light-mode [class*="text-slate-400"],
+body.light-mode [class*="text-slate-500"],
+body.light-mode [class*="text-gray-300"],
+body.light-mode [class*="text-gray-400"],
+body.light-mode [class*="text-gray-500"],
+body.light-mode [class*="text-neutral-400"],
+body.light-mode [class*="text-neutral-500"],
+body.light-mode .text-zinc-400,
+body.light-mode .text-zinc-500 {
+  color: #3f3f46 !important;
+}
+
+/* Tertiary & auxiliary texts - Converts deep grays to a supportive, readable mid-dark gray */
+body.light-mode [class*="text-zinc-600"],
+body.light-mode [class*="text-zinc-650"],
+body.light-mode [class*="text-slate-550"],
+body.light-mode [class*="text-slate-600"],
+body.light-mode [class*="text-slate-655"],
+body.light-mode [class*="text-gray-600"],
+body.light-mode [class*="text-neutral-600"],
+body.light-mode .text-zinc-600,
+body.light-mode .text-zinc-650 {
+  color: #71717a !important;
+}
+
+/* EXCEPTIONS: Keep white text white on vibrant colored buttons/badges */
+body.light-mode .bg-teal-600 text,
+body.light-mode .bg-teal-600 span,
+body.light-mode .bg-teal-600 p,
+body.light-mode .bg-teal-600 .text-white,
+body.light-mode .bg-teal-700 .text-white,
+body.light-mode .bg-emerald-600 text,
+body.light-mode .bg-emerald-600 span,
+body.light-mode .bg-emerald-600 p,
+body.light-mode .bg-emerald-600 .text-white,
+body.light-mode .bg-emerald-700 .text-white,
+body.light-mode .bg-indigo-600 .text-white,
+body.light-mode .bg-orange-600 .text-white,
+body.light-mode .bg-rose-600 .text-white,
+body.light-mode .bg-indigo-500 .text-white,
+body.light-mode .bg-orange-500 .text-white,
+body.light-mode .bg-rose-500 .text-white,
+body.light-mode .bg-sky-500 .text-white,
+body.light-mode .bg-sky-600 .text-white,
+body.light-mode .bg-sky-600 span,
+body.light-mode .bg-sky-600 p,
+body.light-mode .bg-gradient-to-r .text-white,
+body.light-mode .bg-gradient-to-br .text-white,
+body.light-mode button.bg-teal-600,
+body.light-mode button.bg-emerald-600,
+body.light-mode button.bg-indigo-600,
+body.light-mode button.bg-rose-600,
+body.light-mode button.bg-orange-600,
+body.light-mode button.bg-sky-600 {
+  color: #ffffff !important;
+}
+
+/* Modals & Guides overlay backdrop */
+body.light-mode [class*="bg-black/85"],
+body.light-mode [class*="bg-black/50"],
+body.light-mode .bg-black\/85,
+body.light-mode .bg-black\/50 {
+  background-color: rgba(244, 244, 245, 0.82) !important;
+  backdrop-filter: blur(12px) !important;
+}
+body.light-mode .from-zinc-900 {
+  --tw-gradient-from: #ffffff !important;
+}
+body.light-mode .to-\[\#0e0e11\] {
+  --tw-gradient-to: #fafafa !important;
+}
+
+/* Tool Buttons / Controls hover */
+body.light-mode [class*="hover:bg-zinc-700"]:hover,
+body.light-mode [class*="hover:bg-zinc-800"]:hover,
+body.light-mode [class*="hover:bg-zinc-755"]:hover,
+body.light-mode .hover\:bg-zinc-700:hover,
+body.light-mode .hover\:bg-zinc-800:hover {
+  background-color: #d4d4d8 !important;
+  color: #09090b !important;
+}
+
+/* Inputs, Sliders, Dropdowns */
+body.light-mode input[type="text"],
+body.light-mode input[type="number"],
+body.light-mode select {
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  border-color: #c4c4c7 !important;
+}
+
+/* Slices & Plots adjustments */
+body.light-mode .stroke-\[\#27272a\] {
+  stroke: #e4e4e7 !important;
+}
+body.light-mode .fill-\[\#09090b\] {
+  fill: #fafafa !important;
+}
+body.light-mode text[fill="#f4f4f5"] {
+  fill: #09090b !important;
+}
+body.light-mode text[fill="#71717a"] {
+  fill: #4b5563 !important;
+}
+body.light-mode line[stroke="#27272a"] {
+  stroke: #d4d4d8 !important;
+}
+
+/* Specific elements like active selected items in sidebars */
+body.light-mode [class*="border-teal-500/50"],
+body.light-mode .border-teal-500\/50 {
+  border-color: #0d9488 !important;
+}
+body.light-mode [class*="text-teal-300"],
+body.light-mode .text-teal-300 {
+  color: #0f766e !important;
+}
+body.light-mode [class*="text-teal-400"],
+body.light-mode .text-teal-400 {
+  color: #0d9488 !important;
+}
+body.light-mode [class*="text-teal-450"],
+body.light-mode .text-teal-450 {
+  color: #0f766e !important;
+}
+body.light-mode [class*="text-sky-400"],
+body.light-mode .text-sky-400 {
+  color: #0284c7 !important;
+}
+body.light-mode [class*="text-emerald-400"],
+body.light-mode .text-emerald-400 {
+  color: #0284c7 !important;
+}
+body.light-mode [class*="text-purple-400"],
+body.light-mode .text-purple-400,
+body.light-mode .text-\[\#c084fc\] {
+  color: #7c3aed !important;
+}
+body.light-mode [class*="text-rose-400"],
+body.light-mode .text-rose-400,
+body.light-mode [class*="text-pink-400"],
+body.light-mode .text-pink-400 {
+  color: #cb1a1a !important;
+}
+body.light-mode [class*="text-indigo-400"],
+body.light-mode .text-indigo-400 {
+  color: #4f46e5 !important;
+}
+body.light-mode [class*="text-amber-400"],
+body.light-mode .text-amber-400 {
+  color: #b45309 !important;
+}
+body.light-mode [class*="text-amber-500"],
+body.light-mode .text-amber-500 {
+  color: #b45309 !important;
+}
+body.light-mode [class*="border-teal-500/30"],
+body.light-mode .border-teal-500\/30 {
+  border-color: rgba(13, 148, 136, 0.4) !important;
+}
+body.light-mode [class*="text-zinc-450"],
+body.light-mode .text-zinc-450 {
+  color: #4b5563 !important;
+}
+
+/* -----------------------------------------
+   SMOOTH DARK/LIGHT MODE TOGGLE TRANSITIONS
+   ----------------------------------------- */
+body,
+aside,
+section,
+header,
+footer,
+button,
+select,
+input[type="text"],
+input[type="number"],
+a,
+span,
+p,
+h1,h2,h3,h4,h5,h6,
+.bg-zinc-900,
+.bg-zinc-950,
+.bg-\[\#09090b\],
+.bg-\[\#0c0c0e\],
+.bg-\[\#121214\],
+.bg-\[\#131316\],
+.bg-\[\#1c1c1f\],
+.bg-\[\#18181b\],
+.bg-\[\#1f1f23\],
+.border-zinc-800,
+.border-zinc-700,
+.border-\[\#27272a\] {
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+

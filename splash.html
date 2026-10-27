@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  :root {
+    --ink: #0B1120;
+    --ink-2: #111827;
+    --teal: #14B8A6;
+    --cyan: #22D3EE;
+    --violet: #8B5CF6;
+    --text: #F8FAFC;
+    --text-dim: #64748B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    font-family: -apple-system, "Segoe UI", "IBM Plex Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .splash {
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background: radial-gradient(120% 120% at 50% 20%, var(--ink-2) 0%, var(--ink) 65%);
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Faint instrument gridlines, fade in slowly behind everything */
+  .grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+    animation: gridFadeIn 1.2s ease-out 0.1s forwards;
+  }
+  .grid div {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    height: 1px;
+    background: rgba(148, 163, 184, 0.10);
+  }
+  .grid div:nth-child(1) { top: 32%; }
+  .grid div:nth-child(2) { top: 50%; }
+  .grid div:nth-child(3) { top: 68%; }
+
+  @keyframes gridFadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Waveform draw-in: stroke-dasharray trick, like an instrument calibrating */
+  .wave-wrap {
+    width: 190px;
+    height: 190px;
+    position: relative;
+    margin-bottom: 2px;
+  }
+
+  .wave-path-ghost {
+    opacity: 0.12;
+    stroke: #475569;
+  }
+
+  .wave-path {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: drawWave 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+    filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.45));
+  }
+
+  @keyframes drawWave {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .apex-dot {
+    opacity: 0;
+    transform: scale(0.3);
+    transform-origin: center;
+    animation: apexPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.55s forwards;
+  }
+
+  @keyframes apexPop {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .ring {
+    opacity: 0;
+    animation: ringExpand 1.1s ease-out 1.6s forwards;
+  }
+
+  @keyframes ringExpand {
+    0%   { opacity: 0.7; r: 12; }
+    100% { opacity: 0;   r: 34; }
+  }
+
+  /* Wordmark: fades + rises in after the waveform settles */
+  .wordmark {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: wordIn 0.7s ease-out 1.5s forwards;
+    text-align: center;
+  }
+
+  @keyframes wordIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .wordmark .name {
+    font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--text);
+    background: linear-gradient(90deg, #E2E8F0 0%, #F8FAFC 50%, #E2E8F0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .wordmark .tagline {
+    margin-top: 7px;
+    font-size: 11.5px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+  }
+
+  /* Loading indicator: three dots, subtle pulse, appears last */
+  .status {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: statusIn 0.5s ease-out 2.0s forwards;
+  }
+
+  @keyframes statusIn {
+    to { opacity: 1; }
+  }
+
+  .status .msg {
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .dots {
+    display: flex;
+    gap: 5px;
+  }
+  .dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  .dots span:nth-child(2) { background: var(--cyan); animation-delay: 0.15s; }
+  .dots span:nth-child(3) { background: var(--violet); animation-delay: 0.3s; }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.85); }
+    50%      { opacity: 1;    transform: scale(1.15); }
+  }
+</style>
+</head>
+<body>
+  <div class="splash">
+    <div class="grid"><div></div><div></div><div></div></div>
+
+    <div class="wave-wrap">
+      <svg viewBox="0 0 220 220" width="190" height="190">
+        <defs>
+          <linearGradient id="waveGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%"  stop-color="#14B8A6"/>
+            <stop offset="55%" stop-color="#22D3EE"/>
+            <stop offset="100%" stop-color="#8B5CF6"/>
+          </linearGradient>
+        </defs>
+        <path class="wave-path-ghost"
+          d="M 18 140
+             C 46 140, 60 140, 70 136
+             C 80 132, 83 116, 84 96
+             C 85 76, 86 50, 90 39
+             C 93 30, 100 30, 103 39
+             C 106 48, 106 70, 107 91
+             C 108 110, 110 130, 122 137
+             C 138 146, 162 140, 184 140
+             L 202 140"
+          stroke="#475569"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+        <path class="wave-path"
+          d="M 18 140
+             C 46 140, 60 140, 70 136
+             C 80 132, 83 116, 84 96
+             C 85 76, 86 50, 90 39
+             C 93 30, 100 30, 103 39
+             C 106 48, 106 70, 107 91
+             C 108 110, 110 130, 122 137
+             C 138 146, 162 140, 184 140
+             L 202 140"
+          stroke="url(#waveGrad)"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+        <circle class="ring" cx="97" cy="35" r="12" fill="none" stroke="#22D3EE" stroke-width="1.5"/>
+        <circle class="apex-dot" cx="97" cy="35" r="4.5" fill="#F8FAFC"/>
+      </svg>
+    </div>
+
+    <div class="wordmark">
+      <div class="name">LABSCRIBBER</div>
+      <div class="tagline">Scientific Spectroscopy Workstation</div>
+    </div>
+
+    <div class="status">
+      <div class="msg">INITIALIZING WORKSPACE</div>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-desktop/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Test/coverage output
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Electron build cache
+.electron-builder-cache/
