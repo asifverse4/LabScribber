@@ -98,6 +98,8 @@ Full release history: [`CHANGELOG.md`](CHANGELOG.md).
 
 If you use LabScribber in your research, please cite it using [`CITATION.cff`](CITATION.cff). GitHub's **Cite this repository** button reads it directly. A draft JOSS paper is included (`paper.md`, `paper.bib`) but has not been submitted.
 
+> Raza, A., & Basheer, H. (2026). *LabscribberPro* (v1.1.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23689725
+
 <br>
 
 <div align="center">

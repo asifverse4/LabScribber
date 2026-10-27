@@ -9,10 +9,10 @@ tags:
   - chemistry
 authors:
   - name: Asif Raza
-    orcid: 0000-0000-0000-0000  # TODO: replace with your real ORCID iD (https://orcid.org)
+    orcid: 0009-0000-3850-4907
     affiliation: 1
   - name: Huma Basheer
-    orcid: 0000-0000-0000-0000  # TODO: replace with your real ORCID iD
+    orcid: 0009-0007-6143-7192
     affiliation: 1
 affiliations:
   - name: School of Chemical and Life Sciences, Jamia Hamdard University, New Delhi, India
@@ -28,10 +28,8 @@ bibliography: paper.bib
      itself, not only academic supervision), add him as an author + affiliation.
      If his role was supervisory/advisory only, an Acknowledgements mention
      (see below) is the more accurate place for that credit.
-  2. Fill in real ORCID iDs for every author (placeholders above are dummy IDs).
-  3. Tag and archive a release (e.g. via Zenodo, which can auto-archive a
-     GitHub release and mint a DOI) — JOSS requires an archived version with
-     a version number and DOI, separate from the GitHub repo itself.
+  2. (done) ORCID iDs added for Raza and Basheer. Add one for Khan if he is listed as an author.
+  3. (done) Release archived on Zenodo: https://doi.org/10.5281/zenodo.23689725 (v1.1.1).
   4. Add that archival DOI + version number to the JOSS submission form.
   5. Re-check the word count (JOSS wants ~250–1000 words in Summary +
      Statement of Need, excluding this comment block and the bibliography).
@@ -119,8 +117,8 @@ least-squares baseline correction [@eilers2005baseline].
 
 # Acknowledgements
 
-<!-- TODO: add funding sources, supervisory acknowledgement (e.g. Dr. Imran
-     A. Khan, if not listed as a co-author above), and any other academic
-     acknowledgements here. -->
+We thank Dr. Imran A. Khan (ORCID: 0000-0002-2014-4277) for supervision and guidance.
+
+<!-- TODO: add funding sources (if any) and any other acknowledgements here. -->
 
 # References
