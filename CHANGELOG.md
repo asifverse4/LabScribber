@@ -2,6 +2,16 @@
 
 All notable changes to LabscribberPro are documented here. Dates use ISO 8601 (YYYY-MM-DD).
 
+## [1.2.0] — 2026-10-27
+
+### Added
+- Desktop installers for Windows (NSIS installer and zip), macOS (dmg and zip, Intel and Apple Silicon) and Linux (AppImage), built automatically in GitHub Actions and attached to each release.
+- `release.yml` workflow: pushing a `v*` tag builds and publishes the installers.
+- README download section.
+
+### Changed
+- Bundled packages moved to `devDependencies`, which keeps `node_modules` out of the packaged app and makes installers much smaller.
+
 ## [1.1.1] — 2026-10-27
 
 ### Changed

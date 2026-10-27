@@ -1,7 +1,7 @@
 {
   "name": "labscribber",
   "private": true,
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A browser-based scientific spectroscopy workstation for UV-Vis, FTIR, Raman, NMR, XPS, photoluminescence, XRD, and electrochemical (CV/EIS) data analysis, backed by an automated test suite (177 tests).",
   "license": "MIT",
   "author": "Asif Raza",
@@ -26,39 +26,38 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "@vitejs/plugin-react": "^5.0.4",
-    "jspdf": "^4.2.1",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "react": "^19.0.1",
-    "react-dom": "^19.0.1",
-    "svg2pdf.js": "^2.7.0",
-    "xlsx": "^0.18.5"
-  },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.4",
     "@vitest/coverage-v8": "^2.1.8",
     "autoprefixer": "^10.4.21",
     "electron": "^42.4.0",
     "electron-builder": "^26.15.2",
     "esbuild": "^0.25.0",
     "jsdom": "^29.1.1",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "svg2pdf.js": "^2.7.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "xlsx": "^0.18.5"
   },
   "build": {
     "appId": "com.labscribber.app",
     "productName": "Labscribber",
+    "copyright": "Copyright (c) 2026 Asif Raza",
     "directories": {
       "output": "dist-desktop"
     },
@@ -71,29 +70,63 @@
       "splash.html"
     ],
     "win": {
+      "icon": "build/icon.ico",
       "target": [
-        "nsis",
-        "zip"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
-      "icon": "build/icon.ico"
+      "artifactName": "${productName}-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
     },
     "mac": {
+      "icon": "build/icon.icns",
       "category": "public.app-category.developer-tools",
       "target": [
-        "dmg",
-        "zip"
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
       ],
-      "icon": "build/icon.icns"
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}",
+      "identity": null
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
+      "icon": "build/icon.png",
       "category": "Science",
-      "icon": "build/icon.png"
-    },
-    "icon": "build/icon.png"
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-linux-${arch}.${ext}"
+    }
   },
   "repository": {
     "type": "git",

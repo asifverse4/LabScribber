@@ -10,7 +10,7 @@
 [![Node](https://img.shields.io/badge/node-%E2%89%A520.19-D4B483?style=flat-square&labelColor=0C1424)](package.json)
 [![Cite](https://img.shields.io/badge/cite-CITATION.cff-8FA3BF?style=flat-square&labelColor=0C1424)](CITATION.cff)
 
-**[Quick start](#quick-start)** &nbsp;·&nbsp; **[Capabilities](#capabilities)** &nbsp;·&nbsp; **[Quality](#quality--reproducibility)** &nbsp;·&nbsp; **[Roadmap](#known-limitations--roadmap)** &nbsp;·&nbsp; **[Citing](#citing)**
+**[Download](#download)** &nbsp;·&nbsp; **[Quick start](#quick-start)** &nbsp;·&nbsp; **[Capabilities](#capabilities)** &nbsp;·&nbsp; **[Quality](#quality--reproducibility)** &nbsp;·&nbsp; **[Roadmap](#known-limitations--roadmap)** &nbsp;·&nbsp; **[Citing](#citing)**
 
 </div>
 
@@ -49,6 +49,20 @@ LabScribber is a browser-based, Electron-packaged workstation for academic spect
 | **Electrochemistry** | Cyclic voltammetry and impedance (EIS) |
 | **Reproducibility** | Session files (`.lsb`), provenance tracking and methods-section text generation |
 | **Export** | Publication-oriented figures and PDF output |
+
+## Download
+
+Desktop installers are attached to every [release](https://github.com/asifverse4/LabScribber/releases/latest):
+
+| Platform | File |
+|---|---|
+| **Windows** | `Labscribber-<version>-win-x64.exe` (installer) or `.zip` (portable) |
+| **macOS** | `Labscribber-<version>-mac-arm64.dmg` (Apple Silicon) or `-mac-x64.dmg` (Intel) |
+| **Linux** | `Labscribber-<version>-linux-x86_64.AppImage` (`chmod +x`, then run) |
+
+> The installers are not code-signed yet. **Windows:** if SmartScreen appears, choose *More info → Run anyway*. **macOS:** right-click the app and choose *Open* the first time. The source is open and the build runs in public CI, so you can verify what you install.
+
+Prefer the browser? See [Quick start](#quick-start) to run it locally.
 
 ## Quick start
 

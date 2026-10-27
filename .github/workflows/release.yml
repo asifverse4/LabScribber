@@ -1,0 +1,84 @@
+name: Release installers
+
+# Pushing a tag like v1.2.0 builds Windows, macOS and Linux installers and
+# attaches them to the GitHub release for that tag (created if missing).
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to build and attach installers to (e.g. v1.2.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    name: Verify (type-check, tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
+  build:
+    name: Build (${{ matrix.name }})
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: Windows, os: windows-latest, flag: '--win' }
+          - { name: macOS, os: macos-latest, flag: '--mac' }
+          - { name: Linux, os: ubuntu-latest, flag: '--linux' }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Package installers
+        run: npx electron-builder ${{ matrix.flag }} --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installers-${{ matrix.name }}
+          if-no-files-found: error
+          path: |
+            dist-desktop/*.exe
+            dist-desktop/*.dmg
+            dist-desktop/*.zip
+            dist-desktop/*.AppImage
+
+  release:
+    name: Publish to GitHub release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: installers-*
+          merge-multiple: true
+          path: installers
+      - name: List files
+        run: ls -lh installers
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          files: installers/*
+          generate_release_notes: true
