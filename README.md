@@ -100,6 +100,6 @@ If you use LabScribber in your research, please cite it using [`CITATION.cff`](C
 <div align="center">
 
 <sub>Developed at the School of Chemical and Life Sciences, Jamia Hamdard University, New Delhi, India.<br>
-Created by <b>Asif Raza</b> · Contributor: <b>Huma Basheer</b> · Released under the <a href="LICENSE">MIT License</a></sub>
+Created by <b>Asif Raza</b> · Contributor: <b>Huma Basheer</b> · Supervision: <b>Imran A. Khan</b> · Released under the <a href="LICENSE">MIT License</a></sub>
 
 </div>
