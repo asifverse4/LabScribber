@@ -46,7 +46,7 @@
     "motion": "^12.23.24",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "svg2pdf.js": "^2.7.0",
+    "svg2pdf.js": "^2.8.1",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
