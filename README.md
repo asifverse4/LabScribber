@@ -12,7 +12,7 @@ photoluminescence, XRD, and electrochemical (CV/EIS) data.
 
 ## Run Locally
 
-**Prerequisites:** Node.js ≥ 18
+**Prerequisites:** Node.js ≥ 20.19
 
 1. Install dependencies:
    ```bash
@@ -42,7 +42,7 @@ With a coverage report (`coverage/index.html`):
 npm run test:coverage
 ```
 
-Every push and pull request runs the full suite on Node 18/20/22 via
+Every push and pull request runs the full suite on Node 20/22 via
 [GitHub Actions](.github/workflows/ci.yml) — see the badge above.
 
 ## Build for Production

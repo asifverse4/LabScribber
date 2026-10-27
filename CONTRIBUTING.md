@@ -22,7 +22,7 @@ Thank you for your interest in contributing! This guide covers everything you ne
 ## 1. Development Setup
 
 **Requirements:**
-- Node.js ≥ 18.0 (check with `node -v`)
+- Node.js ≥ 20.19 (check with `node -v`)
 - npm ≥ 9.0 (check with `npm -v`)
 
 ```bash
