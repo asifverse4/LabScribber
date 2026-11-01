@@ -5,9 +5,11 @@ All notable changes to LabscribberPro are documented here. Dates use ISO 8601 (Y
 ## [Unreleased]
 
 ### Added
+- Web Worker client bridge and background compute worker (`src/workers/mathWorker.ts`, `src/utils/workerBridge.ts`) offloading peak fitting, ALS baseline correction, MCR-ALS, and PCA SVD from the UI thread with graceful synchronous fallback.
+- Fix NIPALS PCA initialization vector in `runPCASVD` to seed with maximum residual variance column instead of degenerate ones on mean-centered data.
 - Extended peak deconvolution goodness-of-fit metrics in `fitSpectralPeaks` with model selection criteria: Adjusted $R^2$ ($R^2_{\text{adj}}$), Akaike Information Criterion (AIC), finite-sample corrected AICc, Bayesian Information Criterion (BIC), and Durbin-Watson statistic for residual autocorrelation.
 - Robust multi-scale Tauc bandgap extraction module (`extractTaucBandgap` in `src/utils/math.ts`) with 3-point median despiking, noise-resilient sliding window regression, and $R^2$ linearity weighting (resolves noise sensitivity limitation in paper §2.3).
-- Dedicated automated unit test suites covering robust Tauc analysis and model selection criteria (expanding test suite to 183 tests).
+- Dedicated automated unit test suites covering background worker bridges, robust Tauc analysis, and model selection criteria (expanding test suite to 187 tests).
 - Comprehensive strategic roadmap (`ROADMAP.md`) establishing a 5-phase engineering vision: Web Worker/WASM compute acceleration, 2D hyperspectral imaging, EIS equivalent circuits, Rietveld PXRD refinement, native vendor binary decoders (Bruker OPUS, Thermo SPC, Renishaw WDF, VAMAS), and the `labscribber-io` Python ecosystem bridge.
 - Future Scope & Roadmap section in `README.md` summarizing milestones and deliverables.
 

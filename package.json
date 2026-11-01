@@ -2,7 +2,7 @@
   "name": "labscribber",
   "private": true,
   "version": "1.2.0",
-  "description": "A browser-based scientific spectroscopy workstation for UV-Vis, FTIR, Raman, NMR, XPS, photoluminescence, XRD, and electrochemical (CV/EIS) data analysis, backed by an automated test suite (183 tests).",
+  "description": "A browser-based scientific spectroscopy workstation for UV-Vis, FTIR, Raman, NMR, XPS, photoluminescence, XRD, and electrochemical (CV/EIS) data analysis, backed by an automated test suite (187 tests).",
   "license": "MIT",
   "author": "Asif Raza",
   "contributors": [

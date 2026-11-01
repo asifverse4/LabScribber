@@ -453,7 +453,19 @@ export function runPCASVD(matrices: number[][], refX: number[]): PCAOutput {
   let resid = centered.map(r => [...r]);
 
   for (let pc = 0; pc < maxPCs; pc++) {
-    let score = new Array(mCount).fill(1);
+    // Seed NIPALS score vector with the column exhibiting maximum residual variance
+    // (filling with 1s fails on mean-centered data because sum(resid[:, j]) == 0)
+    let seedCol = 0;
+    let maxColSS = -1;
+    for (let j = 0; j < nCount; j++) {
+      let colSS = 0;
+      for (let i = 0; i < mCount; i++) colSS += resid[i][j] ** 2;
+      if (colSS > maxColSS) {
+        maxColSS = colSS;
+        seedCol = j;
+      }
+    }
+    let score = resid.map(r => r[seedCol]);
     let loading = new Array(nCount).fill(0);
     for (let iter = 0; iter < 40; iter++) {
       for (let j = 0; j < nCount; j++) {
