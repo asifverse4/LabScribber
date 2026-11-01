@@ -152,3 +152,4 @@ LabScribber's roadmap is driven by research practitioners across academic, gover
 - Open a feature discussion on [GitHub Discussions](https://github.com/asifverse4/LabScribber/discussions).
 - Submit bug reports and feature requests via [GitHub Issues](https://github.com/asifverse4/LabScribber/issues).
 - Review our [Contributing Guide](CONTRIBUTING.md) to propose algorithm implementations or test cases.
+

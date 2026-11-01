@@ -23,6 +23,7 @@ import {
   sternVolmer,
   beerLambertCalibration,
   kubelkaMunk,
+  extractTaucBandgap,
   rayleighMieSubtraction,
   kramersKronig,
   relativePLQY,
@@ -1102,59 +1103,32 @@ export const SpectrumInspector: React.FC<SpectrumInspectorProps> = ({
       return;
     }
 
-    // Optionally restrict to a user-specified wavelength window before
-    // running the auto-detection, so a strong unrelated feature elsewhere
-    // in the scan (e.g. a deep-UV solvent cutoff) cannot dominate the
-    // steepest-slope search and produce a chemically meaningless result.
-    let srcX = sd.x;
-    let srcY = sd.y_processed;
-    if (taucUseManualRange) {
-      const rMin = parseFloat(taucRangeMin);
-      const rMax = parseFloat(taucRangeMax);
-      if (!isNaN(rMin) && !isNaN(rMax) && rMax > rMin) {
-        const idxInRange: number[] = [];
-        for (let i = 0; i < sd.x.length; i++) {
-          if (sd.x[i] >= rMin && sd.x[i] <= rMax) idxInRange.push(i);
+    const manualOpt = taucUseManualRange
+      ? {
+          manualRangeMin: parseFloat(taucRangeMin),
+          manualRangeMax: parseFloat(taucRangeMax),
         }
-        if (idxInRange.length >= 8) {
-          srcX = idxInRange.map(i => sd.x[i]);
-          srcY = idxInRange.map(i => sd.y_processed[i]);
-        }
-      }
-    }
+      : undefined;
 
-    const tX = srcX.map(wl => 1240 / wl).reverse();
-    const tYRaw = srcY.map((alpha, i) => {
-      const e = 1240 / srcX[i];
-      const prod = alpha * e;
-      return transition === 'direct' ? Math.pow(prod, 2) : Math.pow(prod, 0.5);
-    }).reverse();
-
-    // Automatically locate primary linear tangent range via point of highest first derivative slope
-    const derivY: number[] = [];
-    for (let i = 1; i < tX.length - 1; i++) {
-       derivY.push((tYRaw[i+1] - tYRaw[i-1]) / (tX[i+1] - tX[i-1]));
-    }
-    const maxDerivIdx = derivY.indexOf(Math.max(...derivY)) + 1;
-    
-    // Fit central quadrant
-    const segmentSize = 8;
-    const startIdx = Math.max(0, maxDerivIdx - Math.floor(segmentSize/2));
-    const fitX = tX.slice(startIdx, startIdx + segmentSize);
-    const fitY = tYRaw.slice(startIdx, startIdx + segmentSize);
-
-    const { m, c } = linearRegression(fitX, fitY);
-    const eg = -c / m;
+    const taucRes = extractTaucBandgap(sd.x, sd.y_processed, transition, manualOpt);
 
     const list = datasets.map(d => {
       if (d.id === sd.id) {
         return {
           ...d,
-          x: [...tX],
-          y_processed: [...tYRaw],
+          x: [...taucRes.hnu_eV],
+          y_processed: [...taucRes.tauc_y],
           isTauc: true,
-          taucData: { m, c, eg, x_start: tX[maxDerivIdx] - 0.4, x_end: eg, transition },
-          history: [...d.history, `[${new Date().toLocaleTimeString()}] Executed semiconductor Tauc Plot (${transition})${taucUseManualRange ? ` constrained to ${taucRangeMin}-${taucRangeMax} nm` : ''}. Eg Extrapolation = ${eg.toFixed(3)} eV.`],
+          taucData: {
+            m: taucRes.m,
+            c: taucRes.c,
+            eg: taucRes.eg,
+            x_start: taucRes.x_start,
+            x_end: taucRes.x_end,
+            transition,
+            r2: taucRes.r2,
+          },
+          history: [...d.history, `[${new Date().toLocaleTimeString()}] Executed semiconductor Tauc Plot (${transition})${taucUseManualRange ? ` constrained to ${taucRangeMin}-${taucRangeMax} nm` : ''}. Eg Extrapolation = ${taucRes.eg.toFixed(3)} eV.`],
           peaks: [] // clear constraints
         };
       }
@@ -1168,8 +1142,8 @@ export const SpectrumInspector: React.FC<SpectrumInspectorProps> = ({
     setXLabel("Energy Offset, hν (eV)");
     setYLabel(transition === 'direct' ? '(αhν)²' : '(αhν)⁰⁵');
     setAutoX(false);
-    setManualXMin(Math.max(0, eg - 1.2));
-    setManualXMax(eg + 1.8);
+    setManualXMin(Math.max(0, taucRes.eg - 1.2));
+    setManualXMax(taucRes.eg + 1.8);
   };
 
   // Continuous Job's plot stoichiometric intercepts

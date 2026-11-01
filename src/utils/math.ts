@@ -1339,6 +1339,175 @@ export function kubelkaMunk(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// 9a. ROBUST OPTICAL BANDGAP (TAUC) EXTRACTION
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Result type for robust Tauc optical bandgap analysis.
+ */
+export interface TaucExtractionResult {
+  /** Photon energy axis in eV sorted ascending */
+  hnu_eV: number[];
+  /** Transformed Tauc ordinate (α·hν)^n */
+  tauc_y: number[];
+  /** Slope (m) of the fundamental absorption edge tangent line */
+  m: number;
+  /** Y-intercept (c) of the tangent line */
+  c: number;
+  /** Extrapolated optical bandgap Eg = -c / m (eV) */
+  eg: number;
+  /** Coefficient of determination R² of the linear tangent fit */
+  r2: number;
+  /** X start coordinate of the fitted linear segment (eV) */
+  x_start: number;
+  /** Extrapolated X intercept (eg) */
+  x_end: number;
+  /** Transition model ('direct' => n=2, 'indirect' => n=0.5) */
+  transition: 'direct' | 'indirect';
+  /** Energy coordinates of the fitted segment */
+  fitX: number[];
+  /** Transformed intensity coordinates of the fitted segment */
+  fitY: number[];
+}
+
+/**
+ * Robust extraction of optical bandgap (Eg) via Tauc analysis:
+ *   (α · hν)^n  vs  hν
+ *
+ * Where n = 2 for direct allowed transitions and n = 0.5 for indirect allowed transitions.
+ *
+ * Rather than relying on a noise-sensitive 2-point derivative peak (paper §2.3), this routine:
+ * 1. Converts wavelength (nm) to photon energy hν (eV) and sorts points in ascending energy order.
+ * 2. Applies gentle local noise suppression (moving average) to compute candidate slope segments.
+ * 3. Scans multi-point sliding regression windows across the fundamental absorption edge.
+ * 4. Ranks candidate windows using a joint objective function balancing steep positive slope (m > 0)
+ *    and linear correlation quality (R²), preventing sub-bandgap tail traps and detector spike artifacts.
+ * 5. Refits the raw unsmoothed points within the optimal window to yield unbiased parameters (m, c, Eg).
+ */
+export function extractTaucBandgap(
+  wavelength_nm: number[],
+  absorbance: number[],
+  transition: 'direct' | 'indirect' = 'direct',
+  options?: {
+    manualRangeMin?: number;
+    manualRangeMax?: number;
+    minWindowPts?: number;
+  }
+): TaucExtractionResult {
+  if (wavelength_nm.length !== absorbance.length || wavelength_nm.length < 8) {
+    throw new Error('Tauc analysis requires at least 8 matched wavelength and absorbance data points.');
+  }
+
+  // Filter to manual wavelength range if specified
+  let validWl = wavelength_nm;
+  let validAbs = absorbance;
+  if (
+    options?.manualRangeMin !== undefined &&
+    options?.manualRangeMax !== undefined &&
+    options.manualRangeMax > options.manualRangeMin
+  ) {
+    const rMin = options.manualRangeMin;
+    const rMax = options.manualRangeMax;
+    const filteredIdx: number[] = [];
+    for (let i = 0; i < wavelength_nm.length; i++) {
+      if (wavelength_nm[i] >= rMin && wavelength_nm[i] <= rMax) {
+        filteredIdx.push(i);
+      }
+    }
+    if (filteredIdx.length >= 8) {
+      validWl = filteredIdx.map(i => wavelength_nm[i]);
+      validAbs = filteredIdx.map(i => absorbance[i]);
+    }
+  }
+
+  // Convert to photon energy hν (eV) and sort in ascending energy
+  const rawHnu = validWl.map(wl => 1240 / wl);
+  const power = transition === 'direct' ? 2 : 0.5;
+  const rawTaucY = validAbs.map((alpha, i) => Math.pow(Math.max(alpha * rawHnu[i], 0), power));
+
+  const sortIdx = Array.from({ length: validWl.length }, (_, i) => i)
+    .sort((a, b) => rawHnu[a] - rawHnu[b]);
+
+  const hnu = sortIdx.map(i => rawHnu[i]);
+  const taucY = sortIdx.map(i => rawTaucY[i]);
+
+  const n = hnu.length;
+
+  // Despike using 3-point median filter to eliminate detector glitch spikes (paper §2.3)
+  const despikedY = [...taucY];
+  for (let i = 1; i < n - 1; i++) {
+    const a = taucY[i - 1], b = taucY[i], c = taucY[i + 1];
+    despikedY[i] = (a <= b && b <= c) || (c <= b && b <= a)
+      ? b
+      : (b <= a && a <= c) || (c <= a && a <= b)
+      ? a
+      : c;
+  }
+
+  // Gentle moving average smoothing on despiked data for robust candidate window scoring
+  const smoothY = movingAverage(despikedY, Math.min(5, Math.max(3, Math.floor(n * 0.04) | 1)));
+
+  // Multi-scale sliding window search for the linear region with highest slope * R²
+  const minWin = Math.max(options?.minWindowPts || 8, Math.min(10, Math.floor(n * 0.08)));
+  const maxWin = Math.min(Math.max(minWin + 4, Math.floor(n * 0.25)), n - 1);
+
+  let bestScore = -Infinity;
+  let bestFit = { m: 0, c: 0, r2: 0, startIdx: 0, endIdx: minWin };
+
+  // Evaluate across window sizes
+  for (let winSize = minWin; winSize <= maxWin; winSize += 2) {
+    for (let s = 0; s <= n - winSize; s++) {
+      const xw = hnu.slice(s, s + winSize);
+      const yw = smoothY.slice(s, s + winSize);
+
+      const reg = linearRegression(xw, yw);
+      if (reg.m <= 1e-9) continue; // must be ascending absorption edge
+
+      const r2 = Math.max(0, reg.r2);
+      // Penalize low linearity sharply, reward steep slope on fundamental edge
+      const score = reg.m * Math.pow(r2, 3);
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestFit = {
+          m: reg.m,
+          c: reg.c,
+          r2,
+          startIdx: s,
+          endIdx: s + winSize,
+        };
+      }
+    }
+  }
+
+  // Re-run linear regression on raw (unsmoothed) data in the identified best window for unbiased parameters
+  const fitX = hnu.slice(bestFit.startIdx, bestFit.endIdx);
+  const fitY = taucY.slice(bestFit.startIdx, bestFit.endIdx);
+  const finalReg = linearRegression(fitX, fitY);
+
+  const m = finalReg.m > 0 ? finalReg.m : bestFit.m;
+  const c = finalReg.m > 0 ? finalReg.c : bestFit.c;
+  const r2 = finalReg.m > 0 ? finalReg.r2 : bestFit.r2;
+
+  const eg = m > 1e-9 ? -c / m : 0;
+  const clampedEg = Math.max(0, parseFloat(eg.toFixed(4)));
+
+  return {
+    hnu_eV: hnu,
+    tauc_y: taucY,
+    m,
+    c,
+    eg: clampedEg,
+    r2: parseFloat(r2.toFixed(4)),
+    x_start: fitX[0],
+    x_end: clampedEg,
+    transition,
+    fitX,
+    fitY,
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 9b. MIE / RAYLEIGH SCATTERING BACKGROUND SUBTRACTION  (UV-Vis)
 // ─────────────────────────────────────────────────────────────────────────────
 

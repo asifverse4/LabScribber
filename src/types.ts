@@ -28,6 +28,7 @@ export interface TaucData {
   x_start: number;
   x_end: number;
   transition: 'direct' | 'indirect';
+  r2?: number;
 }
 
 export interface JobsData {
