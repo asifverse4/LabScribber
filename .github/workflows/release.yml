@@ -19,7 +19,7 @@ jobs:
     name: Verify (type-check, tests)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
@@ -42,7 +42,7 @@ jobs:
           - { name: Linux, os: ubuntu-latest, flag: '--linux' }
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
@@ -55,7 +55,7 @@ jobs:
         run: npx electron-builder ${{ matrix.flag }} --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: installers-${{ matrix.name }}
           if-no-files-found: error
@@ -70,7 +70,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           pattern: installers-*
           merge-multiple: true
