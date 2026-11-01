@@ -100,13 +100,24 @@ npm run electron:dist     # Windows / macOS / Linux installers
 - **Continuous integration** runs type-check, tests and a production build on every push and pull request ([workflow](.github/workflows/ci.yml)).
 - **Verified on synthetic data** with known ground truth; see the accompanying paper (`paper.md`).
 
-## Known limitations & roadmap
+## Future Scope & Roadmap
 
-- **Tauc auto-window selection is noise-sensitive**, even with the manual wavelength-range safeguard set correctly (paper §2.3). A scoped fix is planned.
-- **AI-assisted interpretation is planned, not implemented.** No AI features or AI dependencies are included in this version.
+LabScribber is evolving into a comprehensive, multi-technique open-source spectroscopy workstation. See [**`ROADMAP.md`**](ROADMAP.md) for our detailed multi-phase engineering plan.
+
+| Phase | Milestone Focus | Key Capabilities |
+| :--- | :--- | :--- |
+| **Phase 1** | **High-Performance Compute** | Web Worker solver offloading, Levenberg-Marquardt with analytical Jacobians, Rust/WASM matrix kernels |
+| **Phase 2** | **Technique Expansion** | 2D hyperspectral Raman/FTIR mapping, EIS equivalent circuit modeling (CNLS), Rietveld/Le Bail PXRD, TRPL lifetimes |
+| **Phase 3** | **Vendor Interoperability** | Native binary decoders for Bruker OPUS, Thermo Galactic SPC, Renishaw WDF, VAMAS XPS, and NeXus/HDF5 |
+| **Phase 4** | **FAIR Science & Ecosystem** | `labscribber-io` Python package, Jupyter widgets, direct Zenodo/ELN export, journal composite figure studio |
+| **Phase 5** | **Edge AI & Live Hardware** | 100% on-device ONNX spectral matching (FTIR/Raman), WebSerial/WebUSB live spectrometer acquisition |
+
+### Known Limitations (Current Release)
+- **Tauc auto-window selection is noise-sensitive**, even with the manual wavelength-range safeguard set correctly (paper §2.3). A scoped fix is planned for v1.3.
+- **AI-assisted interpretation is planned, not implemented.** No AI features or cloud dependencies are included in this version.
 - **Real-instrument validation is ongoing.** Validation on non-synthetic datasets is in progress.
 
-Full release history: [`CHANGELOG.md`](CHANGELOG.md).
+Full release history: [`CHANGELOG.md`](CHANGELOG.md) · Comprehensive roadmap: [**`ROADMAP.md`**](ROADMAP.md).
 
 ## Citing
 

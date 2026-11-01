@@ -2,6 +2,12 @@
 
 All notable changes to LabscribberPro are documented here. Dates use ISO 8601 (YYYY-MM-DD).
 
+## [Unreleased]
+
+### Added
+- Comprehensive strategic roadmap (`ROADMAP.md`) establishing a 5-phase engineering vision: Web Worker/WASM compute acceleration, 2D hyperspectral imaging, EIS equivalent circuits, Rietveld PXRD refinement, native vendor binary decoders (Bruker OPUS, Thermo SPC, Renishaw WDF, VAMAS), and the `labscribber-io` Python ecosystem bridge.
+- Future Scope & Roadmap section in `README.md` summarizing milestones and deliverables.
+
 ## [1.2.0] — 2026-10-27
 
 ### Added
