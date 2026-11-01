@@ -717,6 +717,27 @@ export function fitSpectralPeaks(
   const chi2 = ssr / dof;
   const rmse = Math.sqrt(ssr / N);
 
+  // Adjusted R² accounting for model parameters and degrees of freedom
+  const adjR2 = N > numParams + 1 && sst > 1e-30
+    ? 1 - ((1 - r2) * (N - 1)) / (N - numParams - 1)
+    : r2;
+
+  // Model selection information criteria (AIC, sample-size corrected AICc, BIC)
+  const safeSSR = Math.max(ssr, 1e-30);
+  const aic = N * Math.log(safeSSR / N) + 2 * numParams;
+  const aicc = N - numParams - 1 > 0
+    ? aic + (2 * numParams * (numParams + 1)) / (N - numParams - 1)
+    : aic;
+  const bic = N * Math.log(safeSSR / N) + numParams * Math.log(N);
+
+  // Durbin-Watson statistic testing residual autocorrelation (dw ≈ 2 indicates uncorrelated residuals)
+  let dwNum = 0;
+  for (let j = 1; j < N; j++) {
+    const diff = fitResiduals[j] - fitResiduals[j - 1];
+    dwNum += diff * diff;
+  }
+  const durbinWatson = ssr > 1e-30 ? dwNum / ssr : 2;
+
   // ── Parameter uncertainty: covariance Σ = σ̂²·(JᵀJ)⁻¹ ────────────────────
   // J is the Jacobian of the model residuals w.r.t. fit parameters, evaluated
   // at the optimum via central finite differences (Nelder–Mead gives no
@@ -839,7 +860,18 @@ export function fitSpectralPeaks(
     return stat;
   });
 
-  const goodnessOfFit: FitGoodnessMetrics = { r2, chi2, rmse, dof, uncertaintyAvailable: covMatrix !== null };
+  const goodnessOfFit: FitGoodnessMetrics = {
+    r2,
+    chi2,
+    rmse,
+    dof,
+    adjR2,
+    aic,
+    aicc,
+    bic,
+    durbinWatson,
+    uncertaintyAvailable: covMatrix !== null,
+  };
 
   return { fitResult, fitComponents, fitResiduals, peakStats, goodnessOfFit };
 }

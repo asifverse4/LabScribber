@@ -218,6 +218,24 @@ describe('fitSpectralPeaks', () => {
     expect(res.goodnessOfFit.r2).toBeGreaterThan(0.99);
   });
 
+  it('computes model selection metrics (AIC, BIC, adjR2, Durbin-Watson) accurately', () => {
+    const x = linspace(0, 10, 200);
+    const y = makeGaussian(x, 1, 5, 0.5);
+    const peaks = [{ id: 'p1', x: 5, y: 1, label: '', confidence: 1, dx: 0, dy: 0 }];
+    const res = fitSpectralPeaks(x, y, peaks, 'Gaussian',
+      { enforce: false, centerTol: 2, widthMin: 0.01, widthMax: 5 });
+
+    expect(res.goodnessOfFit.adjR2).toBeDefined();
+    expect(res.goodnessOfFit.adjR2!).toBeGreaterThan(0.99);
+    expect(res.goodnessOfFit.aic).toBeDefined();
+    expect(res.goodnessOfFit.aicc).toBeDefined();
+    expect(res.goodnessOfFit.bic).toBeDefined();
+    expect(res.goodnessOfFit.bic!).toBeGreaterThan(res.goodnessOfFit.aic!);
+    expect(res.goodnessOfFit.durbinWatson).toBeDefined();
+    expect(res.goodnessOfFit.durbinWatson!).toBeGreaterThan(0);
+    expect(res.goodnessOfFit.durbinWatson!).toBeLessThan(4);
+  });
+
   it('analytical area = amp * sigma * sqrt(2pi) within 5%', () => {
     const amp = 2.0, sig = 1.0;
     const x   = linspace(-10, 10, 500);

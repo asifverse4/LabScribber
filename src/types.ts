@@ -80,6 +80,11 @@ export interface FitGoodnessMetrics {
   chi2: number;        // Reduced chi-squared (SSR / degrees-of-freedom)
   rmse: number;        // Root-mean-square error
   dof: number;         // Degrees of freedom (N_points − N_params)
+  adjR2?: number;      // Adjusted R² accounting for model parameters and sample size
+  aic?: number;        // Akaike Information Criterion (model selection)
+  aicc?: number;       // Corrected Akaike Information Criterion (small-sample bias correction)
+  bic?: number;        // Bayesian Information Criterion (Schwarz criterion)
+  durbinWatson?: number; // Durbin-Watson statistic testing residual autocorrelation
   uncertaintyAvailable?: boolean; // Whether parameter SEs could be computed (see FitPeakStats)
 }
 

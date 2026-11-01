@@ -6,7 +6,7 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/asifverse4/LabScribber/ci.yml?branch=main&style=flat-square&label=CI&labelColor=0C1424&color=5FD6CF)](https://github.com/asifverse4/LabScribber/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-D4B483?style=flat-square&labelColor=0C1424)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-182-5FD6CF?style=flat-square&labelColor=0C1424)](tests)
+[![Tests](https://img.shields.io/badge/tests-183-5FD6CF?style=flat-square&labelColor=0C1424)](tests)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520.19-D4B483?style=flat-square&labelColor=0C1424)](package.json)
 [![Cite](https://img.shields.io/badge/cite-CITATION.cff-8FA3BF?style=flat-square&labelColor=0C1424)](CITATION.cff)
 
@@ -16,7 +16,7 @@
 
 <br>
 
-LabScribber is a browser-based, Electron-packaged workstation for academic spectroscopy. It takes instrument data through baseline correction, peak deconvolution, chemometrics and journal-grade export in one application, and is backed by an automated suite of **182 tests** covering numerical routines and UI behaviour.
+LabScribber is a browser-based, Electron-packaged workstation for academic spectroscopy. It takes instrument data through baseline correction, peak deconvolution, chemometrics and journal-grade export in one application, and is backed by an automated suite of **183 tests** covering numerical routines and UI behaviour.
 
 <br>
 
@@ -96,7 +96,7 @@ npm run electron:dist     # Windows / macOS / Linux installers
 
 ## Quality & reproducibility
 
-- **182 automated tests** across the numerical core and the UI.
+- **183 automated tests** across the numerical core and the UI.
 - **Continuous integration** runs type-check, tests and a production build on every push and pull request ([workflow](.github/workflows/ci.yml)).
 - **Verified on synthetic data** with known ground truth; see the accompanying paper (`paper.md`).
 
